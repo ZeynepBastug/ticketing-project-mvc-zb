@@ -98,8 +98,8 @@
                                                 <div class="form-group">
                                                     <label>Choose a Role</label>
                                                     <select th:field="*{role}">
-                                                        <option th:value="" th:text="Select"></option>
-                                                        <option th:each="role : ${roles}" th:text="Select"></option>
+                                                        <option th:value="''" th:text="Select"></option>
+                                                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.description}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -115,6 +115,9 @@
 
                                     </form>
                                     <!-- ------------------------FORM END----------------------------- -->
+                                    <!-- ------------------------LIST START----------------------------- -->
+
+
 
                                 </div>
 

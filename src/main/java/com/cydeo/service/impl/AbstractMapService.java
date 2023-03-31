@@ -1,4 +1,4 @@
-package com.cydeo.service.imp;
+package com.cydeo.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
