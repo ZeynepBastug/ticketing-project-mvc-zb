@@ -1,6 +1,8 @@
 package com.cydeo.bootstrap;
 
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.dto.UserDTO;
+import com.cydeo.enums.Gender;
 import com.cydeo.service.RoleService;
 import com.cydeo.service.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,9 @@ public class DataGenerator implements CommandLineRunner {
         roleService.save(managerRole);
         roleService.save(employeeRole);
 
+        UserDTO user1 = new UserDTO("Hazel", "Bastug","zb@gmail.com","1234","1234",true,adminRole, Gender.FEMALE);
+
+        userService.save(user1);
 
 
 
