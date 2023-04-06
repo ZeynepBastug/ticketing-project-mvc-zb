@@ -9,7 +9,7 @@ public abstract class AbstractMapService<T, ID> {
 
     protected Map<ID, T> map = new HashMap<>();
 
-   T save (ID id,  T object){
+    T save (ID id,  T object){
         map.put(id, object);
         return object;
     }
@@ -26,8 +26,7 @@ public abstract class AbstractMapService<T, ID> {
        map.remove(id);
     }
 
-     T update (ID id, T object){
+    void update (ID id, T object){
        map.put(id,object);
-       return object;
      }
 }
