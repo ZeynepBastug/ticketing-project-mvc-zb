@@ -32,7 +32,7 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form th:object="${project}" th:action="@{project/create}" method="post">
+                                    <form th:object="${project}" th:action="@{/project/create}" method="post">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -115,7 +115,7 @@
                                 </header>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
+                                        <table  class="table table-striped">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Project Code</th>
@@ -130,13 +130,13 @@
                                             <tr th:each="project : ${projects}">
                                                 <td th:text="${project.projectCode}"></td>
                                                 <td th:text="${project.projectName}"></td>
-                                                <td th:text="${project.projectStartDate + ' ' + project.projectEndDate}"></td>
+                                                <td th:text="${#temporals.format(project.projectStartDate, 'MM.dd.yyyy') + ' ' + #temporals.format(project.projectEndDate, 'MM.dd.yyyy')}"></td>
                                                 <td th:text="${project.assignedManager.firstName + ' ' + project.assignedManager.lastName }"></td>
                                                 <td th:text="${project.projectStatus.value}"></td>
-                                                <td>
-                                                    <a href="#"><button type="button" class="btn btn-warning rounded-0">Update</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-info rounded-0">Complete</button></a>
+                                                <td >
+                                                    <a th:href="@{/project/update/{id}(id= ${project.projectCode})}"><button type="button" class="btn btn-warning rounded-0">Update</button></a>
+                                                    <a th:href="@{/project/delete/{id}(id= ${project.projectCode})}"><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
+                                                    <a th:href="@{/project/create/{id}(id=${project.projectCode})}" ><button type="button" class="btn btn-info rounded-0">Complete</button></a>
                                                 </td>
                                             </tr>
                                             </tbody>
