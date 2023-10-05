@@ -32,14 +32,15 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form action="#">
+                                    <form th:object="${task}" th:action="@{/task/create}" method="post">
 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project</label>
                                                     <select name="project" class="custom-select">
-                                                        <option></option>
+                                                        <option th:value="''" th:text=" "></option>
+                                                        <option th:field="*{project}" th:each="project : ${projects}" th:text="${project.projectCode + ' ' + project.projectName}" th:value="${project.projectCode}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -50,7 +51,8 @@
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
                                                     <select name="assignedemployee" class="custom-select">
-                                                        <option></option>
+                                                        <option th:value="''" th:text=" "></option>
+                                                        <option th:field="*{assignedEmployee}" th:each="assignedEmployee : ${assignedEmployees}" th:value="${assignedEmployee.userName}" th:text="${assignedEmployee.userName + ' ' + assignedEmployee.lastName}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -60,7 +62,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="tasksubject" class="col-form-label">Task Subject</label>
-                                                    <input id="tasksubject" type="text" class="form-control"
+                                                    <input th:field="*{taskSubject}" id="tasksubject" type="text" class="form-control"
                                                            placeholder="task subject">
                                                 </div>
                                             </div>
@@ -70,7 +72,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="taskdetail">Task Detail</label>
-                                                    <textarea id="taskdetail" class="form-control"
+                                                    <textarea th:field="*{taskDetail}" id="taskdetail" class="form-control"
                                                               placeholder="task detail"></textarea>
                                                 </div>
                                             </div>

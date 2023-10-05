@@ -2,11 +2,13 @@ package com.cydeo.bootstrap;
 
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.dto.TaskDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Gender;
 import com.cydeo.enums.Status;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.RoleService;
+import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,11 +20,13 @@ public class DataGenerator implements CommandLineRunner {
     RoleService roleService;
     UserService userService;
     ProjectService projectService;
+    TaskService taskService;
 
-    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService=roleService;
         this.userService=userService;
         this.projectService=projectService;
+        this.taskService=taskService;
     }
 
     @Override
@@ -53,6 +57,14 @@ public class DataGenerator implements CommandLineRunner {
         projectService.save(project1);
         projectService.save(project2);
         projectService.save(project3);
+
+        TaskDTO task1 = new TaskDTO(project1,user2, "Creating Framework", "Creating Test cases in Gherkin", Status.IN_PROGRESS, LocalDate.now().minusMonths(1));
+        TaskDTO task2 = new TaskDTO(project2,user1, "Automation", "Creating Test cases in Gherkin", Status.COMPLETE, LocalDate.now().minusMonths(15));
+        TaskDTO task3 = new TaskDTO(project3,user3, "Selenium Automation", "Configure CI/CD pipeline", Status.IN_PROGRESS, LocalDate.now().minusDays(67));
+
+        taskService.save(task1);
+        taskService.save(task2);
+        taskService.save(task3);
 
     }
 }
