@@ -126,14 +126,14 @@
                                             </thead>
                                             <tbody>
                                             <tr th:each="task : ${tasks}">
-                                                <td th:value="${task.project.projectName}" th:text="${task.project.projectName}"></td>
-                                                <td th:value="${task.taskSubject}" th:text="${task.taskSubject}"></td>
-                                                <td th:value="${task.assignedEmployee.firstName + task.assignedEmployee.lastName}" th:text="${task.assignedEmployee.firstName + ' ' + task.assignedEmployee.lastName}"></td>
-                                                <td th:value="${task.assignedDate}" th:text="${task.assignedDate}"></td>
-                                                <td th:value="${task.status.value}" th:text="${task.status.value}"></td>
+                                                <td th:text="${task.project.projectCode + '-' + task.project.projectName}"></td>
+                                                <td th:text="${task.taskSubject}"></td>
+                                                <td th:text="${task.assignedEmployee.firstName + ' ' + task.assignedEmployee.lastName}"></td>
+                                                <td th:text="${#temporals.format(task.assignedDate, 'MM/dd/yyyy')}"></td>
+                                                <td th:text="${task.status.value}"></td>
                                                 <td class="actions">
-                                                    <a th:href="@{/task/update/{id}(id=${task.id})}" class="btn btn-warning rounded-0">Update</a>
-                                                    <a th:href="@{/task/delete/{id} (id=${task.id})}" class="btn btn-danger rounded-0">Delete</a>
+                                                    <a th:href="@{/task/update/{id}(id=${task.getId()})}" class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/task/delete/{id}(id=${task.getId()})}" class="btn btn-danger rounded-0">Delete</a>
                                                 </td>
                                             </tr>
                                             </tbody>

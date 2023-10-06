@@ -28,7 +28,7 @@ public class TaskController {
     @GetMapping("/create")
     public String taskCreateView(Model model){
          model.addAttribute("task", new TaskDTO());
-         model.addAttribute("assignedEmployees", userService.findAll());
+         model.addAttribute("assignedEmployees", userService.findEmpleyees());
          model.addAttribute("projects", projectService.findAll());
          model.addAttribute("tasks", taskService.findAll());
 
@@ -37,31 +37,36 @@ public class TaskController {
 
     @PostMapping("/create")
     public String taskCreate(TaskDTO taskDTO){
-
         taskService.save(taskDTO);
+        return "redirect:/task/create";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String taskDelete(@PathVariable ("id") Long id){
+        taskService.deleteById(id);
         return "redirect:/task/create";
     }
 
     @GetMapping ("/update/{id}")
     public String taskUpdate(@PathVariable ("id") Long id, Model model){
         model.addAttribute("task", taskService.findById(id));
-        model.addAttribute("assignedEmployees", userService.findAll());
+        model.addAttribute("assignedEmployees", userService.findEmpleyees());
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("tasks", taskService.findAll());
 
         return "/task/update";
     }
-//    @PostMapping ("/update/{taskId}")
-//    public String taskUpdate(@PathVariable ("taskId") Long id,TaskDTO task){
-//        task.setId(id);
-//        taskService.update(task);
-//        return "redirect:/task/create";
-//    }
-
-    @PostMapping("/update/{id}")
-    public String taskUpdate(TaskDTO task){
+    @PostMapping ("/update/{taskId}")
+    public String taskUpdate(@PathVariable ("taskId") Long id,TaskDTO task){
+        task.setId(id);
         taskService.update(task);
         return "redirect:/task/create";
     }
+//
+//    @PostMapping("/update/{id}")
+//    public String taskUpdate(TaskDTO task){
+//        taskService.update(task);
+//        return "redirect:/task/create";
+//    }
 
 }

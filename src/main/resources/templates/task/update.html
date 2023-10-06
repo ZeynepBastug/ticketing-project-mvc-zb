@@ -32,15 +32,14 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form th:object="${task}" th:action="@{/task/update/{id}(id=${task.id})}">
+                                    <form th:object="${task}" th:action="@{/task/update/{id}(id=${task.getId()})}" method="post">
 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project</label>
-                                                    <select th:field="${projects}" name="project" class="custom-select">
-                                                        <option th:text="${task.project.projectCode + ' ' + task.project.projectName }" th:value="${task.project.projectCode + task.project.projectName}"></option>
-                                                        <option th:each="project : ${projects}" th:text="${project.projectCode + ' ' +project.projectName}" th:value="${project.projectName}" ></option>
+                                                    <select th:field="*{project}" name="project" class="custom-select">
+                                                        <option th:each="project : ${projects}" th:text="${project.projectCode + ' ' +project.projectName}" th:value="${project.projectCode}" ></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -50,8 +49,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
-                                                    <select th:field="${assignedEmployees}" name="assignedemployee" class="custom-select">
-                                                        <option th:text="${task.assignedEmployee.firstName + ' ' + task.assignedEmployee.lastName}" th:value="${task.assignedEmployee.userName}"></option>
+                                                    <select th:field="*{assignedEmployee}" name="assignedemployee" class="custom-select">
                                                         <option th:each="assignedEmployee : ${assignedEmployees}" th:text="${assignedEmployee.firstName + ' ' + assignedEmployee.lastName}" th:value="${task.assignedEmployee.userName}"></option>
                                                     </select>
                                                 </div>
@@ -62,7 +60,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="tasksubject" class="col-form-label">Task Subject</label>
-                                                    <input th:field="${task.taskSubject}" id="tasksubject" type="text" class="form-control" placeholder="task subject">
+                                                    <input th:field="*{taskSubject}" id="tasksubject" type="text" class="form-control" placeholder="task subject">
                                                 </div>
                                             </div>
                                         </div>
@@ -71,7 +69,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="taskdetail">Task Detail</label>
-                                                    <textarea th:field="${task.taskDetail}" id="taskdetail" class="form-control" placeholder="task detail"></textarea>
+                                                    <textarea th:field="*{taskDetail}" id="taskdetail" class="form-control" placeholder="task detail"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,8 +125,8 @@
                                                 <td th:text="${task.assignedDate}"></td>
                                                 <td th:text="${task.status.value}"></td>
                                                 <td class="actions">
-                                                    <a th:href="@{/task/update/{id}(id=${task.id})}" class="btn btn-warning rounded-0">Update</a>
-                                                    <a href="#" class="btn btn-danger rounded-0">Delete</a>
+                                                    <a th:href="@{/task/update/{id}(id=${task.getId()})}" class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/task/update/{id}(id=${task.getId()})}" class="btn btn-danger rounded-0">Delete</a>
                                                 </td>
 
                                             </tr>

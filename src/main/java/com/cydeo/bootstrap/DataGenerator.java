@@ -52,15 +52,15 @@ public class DataGenerator implements CommandLineRunner {
 
         ProjectDTO project1 = new ProjectDTO("Form Manager", "1L23DF45", user1, LocalDate.now(), LocalDate.now(), "Working with Evoya team", Status.OPEN);
         ProjectDTO project2 = new ProjectDTO("PKeye", "1E90AS34P", user2, LocalDate.now(), LocalDate.now(), "Working with Evoya team", Status.IN_PROGRESS);
-        ProjectDTO project3 = new ProjectDTO("Form Manager", "1P56MV63F", user1, LocalDate.now(), LocalDate.now(), "Working with Evoya team", Status.COMPLETE);
+        ProjectDTO project3 = new ProjectDTO("Evoya", "1P56MV63F", user1, LocalDate.now(), LocalDate.now(), "Working with Evoya team", Status.COMPLETE);
 
         projectService.save(project1);
         projectService.save(project2);
         projectService.save(project3);
 
-        TaskDTO task1 = new TaskDTO(project1,user2, "Creating Framework", "Creating Test cases in Gherkin", Status.IN_PROGRESS, LocalDate.now().minusMonths(1));
-        TaskDTO task2 = new TaskDTO(project2,user1, "Automation", "Creating Test cases in Gherkin", Status.COMPLETE, LocalDate.now().minusMonths(15));
-        TaskDTO task3 = new TaskDTO(project3,user3, "Selenium Automation", "Configure CI/CD pipeline", Status.IN_PROGRESS, LocalDate.now().minusDays(67));
+        TaskDTO task1 = new TaskDTO(project1,user4, "Creating Framework", "Creating Test cases in Gherkin", Status.IN_PROGRESS, LocalDate.now().minusMonths(1));
+        TaskDTO task2 = new TaskDTO(project2,user3, "Automation", "Creating Test cases in Gherkin", Status.COMPLETE, LocalDate.now().minusMonths(15));
+        TaskDTO task3 = new TaskDTO(project3,user4, "Selenium Automation", "Configure CI/CD pipeline", Status.IN_PROGRESS, LocalDate.now().minusDays(67));
 
         taskService.save(task1);
         taskService.save(task2);
