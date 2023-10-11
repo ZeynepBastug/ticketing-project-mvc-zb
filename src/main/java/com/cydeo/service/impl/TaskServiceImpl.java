@@ -1,6 +1,7 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.TaskDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
 import com.cydeo.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implements TaskService {
@@ -51,5 +53,21 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
 //        object.setAssignedEmployee(task.getAssignedEmployee());
 
         super.update(object.getId(), object);
+    }
+
+    @Override
+    public List<TaskDTO> findAllTasksByStatus(Status status) {
+        return findAll().stream().filter(task -> task.getStatus().getValue().equals(status.getValue())).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<TaskDTO> findAllTasksByStatusIsNot(Status status) {
+        return findAll().stream().filter(task -> !task.getStatus().getValue().equals(status.getValue())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> findTasksByManager(UserDTO user) {
+        return findAll().stream().filter(task -> task.getAssignedEmployee().getUserName().equals(user.getUserName())).collect(Collectors.toList());
     }
 }
